@@ -6,12 +6,12 @@ export default function Nav() {
         <div className="flex flex-row gap-4 flex-start">
           <h1 className="text-4xl font-bold"><Link href="/" className="">Olivia Bisset</Link></h1>
         </div>
-        <div className="flex flex-row gap-4 flex-end">
+        <div className="flex flex-row gap-4 flex-end pr-3">
           <Link href="/about">About</Link>
-          <Link href="/projects">Experience</Link>
-          <Link href="/projects">Education</Link>
-          <Link href="/projects">Skills</Link> 
           <Link href="/projects">Projects</Link>
+          <Link href="/experience">Experience</Link>
+          {/* <Link href="/education">Education</Link>
+          <Link href="/skills">Skills</Link>  */}
         </div>
       </nav>
     );
