@@ -155,7 +155,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export default function About() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10 space-y-16">
+    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-16">
       {/* Hero Section */}
       <section aria-labelledby="about-hero" className="space-y-8">
         <div className="flex flex-col md:flex-row gap-8 items-start">

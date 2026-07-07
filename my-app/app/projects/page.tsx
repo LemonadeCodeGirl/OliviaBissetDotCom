@@ -310,7 +310,7 @@ export default function Projects() {
   const awardCount = projects.filter((p) => p.award).length;
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10 space-y-12">
+    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-12">
       <section aria-labelledby="projects-hero" className="space-y-4">
         <h1
           id="projects-hero"

@@ -193,19 +193,18 @@ function SecondaryButton({
 
 export default function Home() {
   return (
-    <main className="space-y-8id htrt  pb-16">
+    <main className="space-y-8 pb-16">
       {/* Hero */}
-      <section aria-labelledby="hero-heading" className="hero-band">
+      <section aria-labelledby="hero-heading" className="hero-band -mt-14 pt-14">
          <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-6 text-center">
-          <p className="text-sm uppercase tracking-widest text-accent font-medium">
+          <p className="text-sm uppercase tracking-widest text-[#EFECE7] font-medium">
             Software Engineer · Digital Systems Builder · Creative Technologist
           </p>
           <h1
             id="hero-heading"
             className="text-3xl md:text-5xl font-bold text-accent leading-tight max-w-3xl mx-auto"
           >
-            Building digital experiences that combine technology, design, and
-            purpose.
+            Helping you transform ideas into <span className="text-[#333D29]">creative digital solutions</span>
           </h1>
           <div className="max-w-2xl mx-auto space-y-4 text-foreground/85 leading-relaxed">
             <p>

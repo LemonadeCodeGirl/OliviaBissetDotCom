@@ -98,7 +98,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
 
 export default function ExperiencePage() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10 space-y-12">
+    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-12">
       <section aria-labelledby="experience-hero" className="space-y-4">
         <h1
           id="experience-hero"
