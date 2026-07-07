@@ -138,7 +138,7 @@ function SectionHeading({
   return (
     <h2
       id={id}
-      className="text-2xl font-bold text-[#333D29] border-b-2 border-[#919588]/30 pb-2 mb-6"
+      className="text-2xl font-bold text-accent border-b-2 border-accent-light/50 pb-2 mb-6"
     >
       {children}
     </h2>
@@ -147,7 +147,7 @@ function SectionHeading({
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-[#F4F1DE] text-[#333D29] px-3 py-1 rounded-full text-sm">
+    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
       {children}
     </span>
   );
@@ -161,30 +161,30 @@ export default function About() {
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <div className="shrink-0">
             <div
-              className="w-40 h-40 rounded-full bg-[#919588]/20 border-4 border-[#919588]/40 flex items-center justify-center"
+              className="w-40 h-40 rounded-full bg-accent-light/20 border-4 border-accent-muted/40 flex items-center justify-center"
               aria-label="Profile photo placeholder"
             >
-              <span className="text-4xl font-bold text-[#919588]">OB</span>
+              <span className="text-4xl font-bold text-accent-muted">OB</span>
             </div>
-            <p className="text-sm text-[#919588] mt-2 text-center">
+            <p className="text-sm text-accent-muted mt-2 text-center">
               Professional headshot
             </p>
           </div>
 
           <div className="flex-1 space-y-4">
-            <p className="text-sm uppercase tracking-widest text-[#919588] font-medium">
+            <p className="text-sm uppercase tracking-widest text-accent-muted font-medium">
               Software Engineer & Web Developer
             </p>
             <h1
               id="about-hero"
-              className="text-3xl md:text-4xl font-bold text-[#333D29] leading-tight"
+              className="text-3xl md:text-4xl font-bold text-accent leading-tight"
             >
               Turning your ideas into reliable reality
             </h1>
-            <p className="text-lg text-[#333D29]/80 leading-relaxed">
+            <p className="text-lg text-foreground/80 leading-relaxed">
               Building thoughtful digital experiences through code and design.
             </p>
-            <p className="text-[#333D29]/90 leading-relaxed">
+            <p className="text-foreground/90 leading-relaxed">
               I&apos;m a software engineer and web developer who enjoys building
               digital experiences that are both technically sound and easy to
               use. With a background in full-stack software development, UI/UX
@@ -204,7 +204,7 @@ export default function About() {
       {/* My Story */}
       <section aria-labelledby="my-story">
         <SectionHeading id="my-story">My Story</SectionHeading>
-        <div className="space-y-4 text-[#333D29]/90 leading-relaxed">
+        <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             My journey into technology started with web development, where I
             discovered the satisfaction of turning ideas into something people
@@ -247,16 +247,16 @@ export default function About() {
           {whatIDo.map((category) => (
             <div
               key={category.title}
-              className="bg-[#F4F1DE]/50 rounded-lg p-5 border border-[#919588]/20"
+              className="card p-5"
             >
-              <h3 className="font-bold text-[#333D29] mb-3">{category.title}</h3>
+              <h3 className="font-bold text-foreground mb-3">{category.title}</h3>
               <ul className="space-y-2">
                 {category.items.map((item) => (
                   <li
                     key={item}
-                    className="text-sm text-[#333D29]/80 flex items-start gap-2"
+                    className="text-sm text-foreground/80 flex items-start gap-2"
                   >
-                    <span className="text-[#919588] mt-0.5">•</span>
+                    <span className="text-accent-muted mt-0.5">•</span>
                     {item}
                   </li>
                 ))}
@@ -269,7 +269,7 @@ export default function About() {
       {/* My Approach */}
       <section aria-labelledby="my-approach">
         <SectionHeading id="my-approach">My Approach</SectionHeading>
-        <div className="space-y-4 text-[#333D29]/90 leading-relaxed bg-[#F4F1DE]/30 rounded-lg p-6 border-l-4 border-[#919588]">
+        <div className="space-y-4 text-foreground/90 leading-relaxed card p-6 border-l-4 border-l-accent">
           <p>
             Every project starts with understanding the problem before writing a
             single line of code. I believe the best solutions come from asking
@@ -300,7 +300,7 @@ export default function About() {
         <div className="grid sm:grid-cols-2 gap-6">
           {skillCategories.map((category) => (
             <div key={category.title}>
-              <h3 className="font-semibold text-[#333D29] mb-2">
+              <h3 className="font-semibold text-foreground mb-2">
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -318,7 +318,7 @@ export default function About() {
         <SectionHeading id="experience-highlights">
           Experience Highlights
         </SectionHeading>
-        <p className="text-[#333D29]/90 leading-relaxed mb-6">
+        <p className="text-foreground/90 leading-relaxed mb-6">
           My experience spans software engineering internships, freelance web
           development, UI/UX projects, WordPress consulting, and product
           development — each contributing to a well-rounded perspective on
@@ -328,13 +328,13 @@ export default function About() {
           {experienceHighlights.map((stat) => (
             <div
               key={stat.label}
-              className="text-center bg-[#919588]/10 rounded-lg p-4"
+              className="text-center card p-4"
             >
-              <p className="text-2xl font-bold text-[#333D29]">{stat.value}</p>
-              <p className="text-sm font-medium text-[#333D29]/80 mt-1">
+              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+              <p className="text-sm font-medium text-foreground/80 mt-1">
                 {stat.label}
               </p>
-              <p className="text-xs text-[#919588] mt-1">{stat.detail}</p>
+              <p className="text-xs text-accent-muted mt-1">{stat.detail}</p>
             </div>
           ))}
         </div>
@@ -351,7 +351,7 @@ export default function About() {
               <Tag key={role}>{role}</Tag>
             ))}
           </div>
-          <p className="text-[#333D29]/90 leading-relaxed">
+          <p className="text-foreground/90 leading-relaxed">
             Community involvement has been one of the most rewarding parts of my
             journey. Organizing WordCamp events, speaking at conferences,
             mentoring students, and volunteering my time have all reinforced a
@@ -365,7 +365,7 @@ export default function About() {
       {/* Beyond the Code */}
       <section aria-labelledby="beyond-the-code">
         <SectionHeading id="beyond-the-code">Beyond the Code</SectionHeading>
-        <p className="text-[#333D29]/90 leading-relaxed mb-4">
+        <p className="text-foreground/90 leading-relaxed mb-4">
           When I&apos;m not writing code, you&apos;ll find me exploring creative
           outlets and staying curious about the world around me.
         </p>
@@ -383,9 +383,9 @@ export default function About() {
           {currentFocus.map((item) => (
             <li
               key={item}
-              className="text-[#333D29]/90 flex items-start gap-2"
+              className="text-foreground/90 flex items-start gap-2"
             >
-              <span className="text-[#919588]">→</span>
+              <span className="text-accent-muted">→</span>
               {item}
             </li>
           ))}
@@ -395,7 +395,7 @@ export default function About() {
       {/* Call To Action */}
       <section
         aria-labelledby="cta"
-        className="bg-[#919588] rounded-xl p-8 text-[#EFECE7] text-center space-y-6"
+        className="bg-accent rounded-xl p-8 text-surface text-center space-y-6"
       >
         <h2 id="cta" className="text-2xl font-bold">
           Let&apos;s Connect
@@ -407,19 +407,19 @@ export default function About() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/projects"
-            className="bg-[#F4F1DE] text-[#333D29] px-5 py-2 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
           >
             View Projects
           </Link>
           <a
             href="/resume.pdf"
-            className="bg-[#F4F1DE] text-[#333D29] px-5 py-2 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
           >
             Download Resume
           </a>
           <a
             href="mailto:hello@oliviabisset.com"
-            className="bg-[#F4F1DE] text-[#333D29] px-5 py-2 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
           >
             Contact Me
           </a>
@@ -427,7 +427,7 @@ export default function About() {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-[#EFECE7] text-[#EFECE7] px-5 py-2 rounded-md font-medium hover:bg-[#EFECE7]/10 transition-colors"
+            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
           >
             LinkedIn
           </a>
@@ -435,7 +435,7 @@ export default function About() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-[#EFECE7] text-[#EFECE7] px-5 py-2 rounded-md font-medium hover:bg-[#EFECE7]/10 transition-colors"
+            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
           >
             GitHub
           </a>

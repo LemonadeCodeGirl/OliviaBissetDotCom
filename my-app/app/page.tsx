@@ -109,9 +109,15 @@ const experiences = [
     description:
       "Designed and improved the user experience of cybersecurity auditing software, focusing on interface design and usability improvements.",
   },
+  // {
+  //   company: "Accelerate EDU",
+  //   role: "Consulting Software Development",
+  //   description:
+  //     "Developed websites, applications, architectures, and technical solutions while collaborating with stakeholders.",
+  // },
   {
-    company: "Accelerate EDU",
-    role: "Consulting Software Development",
+    company: "LemonadeCode",
+    role: "Founder & Developer",
     description:
       "Developed websites, applications, architectures, and technical solutions while collaborating with stakeholders.",
   },
@@ -134,7 +140,7 @@ function SectionHeading({
   return (
     <h2
       id={id}
-      className="text-2xl font-bold text-[#333D29] border-b-2 border-[#919588]/30 pb-2 mb-6"
+      className="text-2xl font-bold text-accent border-b-2 border-accent-light/50 pb-2 mb-6"
     >
       {children}
     </h2>
@@ -151,7 +157,7 @@ function PrimaryButton({
   return (
     <Link
       href={href}
-      className="bg-[#333D29] text-[#F4F1DE] px-6 py-2.5 rounded-md font-medium hover:bg-[#333D29]/90 transition-colors"
+      className="bg-accent text-surface px-6 py-2.5 rounded-md font-medium hover:bg-accent/90 transition-colors"
     >
       {children}
     </Link>
@@ -168,7 +174,7 @@ function SecondaryButton({
   external?: boolean;
 }) {
   const className =
-    "border-2 border-[#333D29] text-[#333D29] px-6 py-2.5 rounded-md font-medium hover:bg-[#F4F1DE] transition-colors";
+    "border-2 border-accent text-accent px-6 py-2.5 rounded-md font-medium hover:bg-accent-light/15 transition-colors";
 
   if (external) {
     return (
@@ -187,34 +193,31 @@ function SecondaryButton({
 
 export default function Home() {
   return (
-    <main className="space-y-20 pb-16">
+    <main className="space-y-8id htrt  pb-16">
       {/* Hero */}
-      <section
-        aria-labelledby="hero-heading"
-        className="bg-[#F4F1DE]/40 border-b border-[#919588]/20"
-      >
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-6 text-center">
-          <p className="text-sm uppercase tracking-widest text-[#919588] font-medium">
+      <section aria-labelledby="hero-heading" className="hero-band">
+         <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-6 text-center">
+          <p className="text-sm uppercase tracking-widest text-accent font-medium">
             Software Engineer · Digital Systems Builder · Creative Technologist
           </p>
           <h1
             id="hero-heading"
-            className="text-3xl md:text-5xl font-bold text-[#333D29] leading-tight max-w-3xl mx-auto"
+            className="text-3xl md:text-5xl font-bold text-accent leading-tight max-w-3xl mx-auto"
           >
             Building digital experiences that combine technology, design, and
             purpose.
           </h1>
-          <div className="max-w-2xl mx-auto space-y-4 text-[#333D29]/85 leading-relaxed">
+          <div className="max-w-2xl mx-auto space-y-4 text-foreground/85 leading-relaxed">
             <p>
               I&apos;m Olivia Bisset, a Software Engineer and digital creator
               specializing in full-stack development, modern websites,
               AI-powered applications, and user-centered solutions.
             </p>
-            <p>
+            {/* <p>
               From production software used by teams at companies like UKG to
               custom websites and platforms for growing organizations, I build
               technology that helps people work smarter and connect better.
-            </p>
+            </p> */}
           </div>
           <div className="flex flex-wrap justify-center gap-4 pt-2">
             <PrimaryButton href="/projects">View My Work</PrimaryButton>
@@ -225,37 +228,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section aria-labelledby="stats-heading" className="max-w-4xl mx-auto px-6">
-        <SectionHeading id="stats-heading">
-          Engineering + Creativity, Combined
-        </SectionHeading>
-        <ul className="grid sm:grid-cols-2 gap-4">
-          {stats.map((stat) => (
-            <li
-              key={stat.text}
-              className="flex items-start gap-3 bg-white rounded-lg p-4 border border-[#919588]/20"
-            >
-              <span className="text-xl shrink-0" aria-hidden="true">
-                {stat.icon}
-              </span>
-              <span className="text-[#333D29]/90 text-sm leading-relaxed">
-                {stat.text}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
       {/* About Preview */}
       <section
         aria-labelledby="about-preview-heading"
-        className="max-w-4xl mx-auto px-6"
+        className="max-w-4xl mx-auto px-6 py-4"
       >
         <SectionHeading id="about-preview-heading">
           A developer who bridges technology and creativity
         </SectionHeading>
-        <div className="space-y-4 text-[#333D29]/90 leading-relaxed">
+        <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             I&apos;ve always been interested in the space where technology meets
             people.
@@ -277,11 +258,38 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Quick Stats */}
+      <section aria-labelledby="stats-heading" className="section-band py-16">
+        <div className="max-w-4xl mx-auto px-6">
+        <SectionHeading id="stats-heading">
+          Engineering + Creativity, Combined
+        </SectionHeading>
+        <ul className="grid sm:grid-cols-2 gap-4">
+          {stats.map((stat) => (
+            <li
+              key={stat.text}
+              className="card flex items-start gap-3 p-4"
+            >
+              <span className="text-xl shrink-0" aria-hidden="true">
+                {stat.icon}
+              </span>
+              <span className="text-foreground/90 text-sm leading-relaxed">
+                {stat.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+        </div>
+      </section>
+
+      
       {/* Featured Projects */}
       <section
         aria-labelledby="featured-projects-heading"
-        className="max-w-4xl mx-auto px-6"
+        className="section-band py-16"
       >
+        <div className="max-w-4xl mx-auto px-6">
         <SectionHeading id="featured-projects-heading">
           Featured Work
         </SectionHeading>
@@ -289,10 +297,10 @@ export default function Home() {
           {featuredProjects.map((project) => (
             <article
               key={project.name}
-              className={`rounded-xl p-5 border space-y-3 ${
+              className={`card p-5 space-y-3 ${
                 project.award
-                  ? "bg-amber-50/50 border-amber-200/60"
-                  : "bg-white border-[#919588]/20"
+                  ? "border-amber-300/60 bg-amber-50/40"
+                  : ""
               }`}
             >
               <div className="flex items-start gap-2">
@@ -300,28 +308,29 @@ export default function Home() {
                   {project.icon}
                 </span>
                 <div>
-                  <h3 className="font-bold text-[#333D29]">{project.name}</h3>
-                  <p className="text-sm text-[#919588] font-medium">
+                  <h3 className="font-bold text-accent">{project.name}</h3>
+                  <p className="text-sm text-accent-muted font-medium">
                     {project.subtitle}
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-[#333D29]/85 leading-relaxed">
+              <p className="text-sm text-foreground/85 leading-relaxed">
                 {project.description}
               </p>
-              <p className="text-xs text-[#919588]">{project.meta}</p>
+              <p className="text-xs text-accent-muted">{project.meta}</p>
             </article>
           ))}
         </div>
         <div className="mt-8 text-center">
           <PrimaryButton href="/projects">View All Projects</PrimaryButton>
         </div>
+        </div>
       </section>
 
       {/* Skills */}
       <section
         aria-labelledby="skills-heading"
-        className="max-w-4xl mx-auto px-6"
+        className="max-w-4xl mx-auto px-6 py-4"
       >
         <SectionHeading id="skills-heading">
           Technologies I Work With
@@ -330,12 +339,12 @@ export default function Home() {
           {skillGroups.map((group) => (
             <div
               key={group.title}
-              className="bg-[#F4F1DE]/30 rounded-lg p-5 border border-[#919588]/15"
+              className="card p-5"
             >
-              <h3 className="font-semibold text-[#333D29] mb-2">
+              <h3 className="font-semibold text-accent mb-2">
                 {group.title}
               </h3>
-              <p className="text-sm text-[#333D29]/85 leading-relaxed">
+              <p className="text-sm text-foreground/85 leading-relaxed">
                 {group.items}
               </p>
             </div>
@@ -346,8 +355,9 @@ export default function Home() {
       {/* Experience */}
       <section
         aria-labelledby="experience-heading"
-        className="max-w-4xl mx-auto px-6"
+        className="section-band py-16"
       >
+        <div className="max-w-4xl mx-auto px-6">
         <SectionHeading id="experience-heading">
           Experience Building Real-World Software
         </SectionHeading>
@@ -355,13 +365,13 @@ export default function Home() {
           {experiences.map((exp) => (
             <article
               key={exp.company}
-              className="border-l-4 border-[#919588] pl-5 space-y-1"
+              className="card border-l-4 border-l-accent pl-5 py-4 pr-4 space-y-1"
             >
-              <h3 className="font-bold text-[#333D29]">
+              <h3 className="font-bold text-accent">
                 {exp.company}{" "}
-                <span className="font-normal text-[#919588]">— {exp.role}</span>
+                <span className="font-normal text-accent-light">— {exp.role}</span>
               </h3>
-              <p className="text-[#333D29]/85 leading-relaxed text-sm">
+              <p className="text-foreground/85 leading-relaxed text-sm">
                 {exp.description}
               </p>
             </article>
@@ -370,21 +380,22 @@ export default function Home() {
         <div className="mt-6">
           <SecondaryButton href="/experience">View Full Experience</SecondaryButton>
         </div>
+        </div>
       </section>
 
       {/* Community */}
       <section
         aria-labelledby="community-heading"
-        className="max-w-4xl mx-auto px-6"
+        className="max-w-4xl mx-auto px-6 py-4"
       >
         <SectionHeading id="community-heading">
-          Building Technology Beyond Code
+          Building Technology And Community Beyond Code
         </SectionHeading>
-        <p className="text-[#333D29]/90 leading-relaxed mb-6">
+        <p className="text-foreground/90 leading-relaxed mb-6">
           I believe technology grows stronger when more people have the
           opportunity to participate.
         </p>
-        <p className="text-[#333D29]/90 leading-relaxed mb-6">
+        <p className="text-foreground/90 leading-relaxed mb-6">
           I have organized hackathons, taught programming to middle school
           students, spoken at WordCamp events, and supported open-source quality
           initiatives.
@@ -393,9 +404,9 @@ export default function Home() {
           {communityHighlights.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2 text-sm text-[#333D29]/85 bg-white rounded-lg p-3 border border-[#919588]/20"
+              className="card flex items-start gap-2 text-sm text-foreground/85 p-3"
             >
-              <span className="text-[#919588]">→</span>
+              <span className="text-accent font-bold">→</span>
               {item}
             </li>
           ))}
@@ -407,7 +418,7 @@ export default function Home() {
         aria-labelledby="final-cta-heading"
         className="max-w-4xl mx-auto px-6"
       >
-        <div className="bg-[#919588] rounded-xl p-10 md:p-12 text-[#EFECE7] text-center space-y-6">
+        <div className="bg-accent rounded-xl p-10 md:p-12 text-surface text-center space-y-6">
           <h2 id="final-cta-heading" className="text-2xl md:text-3xl font-bold">
             Have an idea? Let&apos;s turn it into something real.
           </h2>
@@ -418,13 +429,13 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="mailto:hello@oliviabisset.com"
-              className="bg-[#F4F1DE] text-[#333D29] px-6 py-2.5 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+              className="bg-accent-pale text-foreground px-6 py-2.5 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
             >
               Start a Project
             </Link>
             <a
               href="mailto:hello@oliviabisset.com"
-              className="border border-[#EFECE7] text-[#EFECE7] px-6 py-2.5 rounded-md font-medium hover:bg-[#EFECE7]/10 transition-colors"
+              className="border border-surface text-surface px-6 py-2.5 rounded-md font-medium hover:bg-surface/10 transition-colors"
             >
               Contact Me
             </a>

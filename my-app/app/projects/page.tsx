@@ -231,7 +231,7 @@ const projects: Project[] = [
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-[#F4F1DE] text-[#333D29] px-3 py-1 rounded-full text-sm">
+    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
       {children}
     </span>
   );
@@ -239,12 +239,12 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="bg-white rounded-xl border border-[#919588]/20 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <article className="card overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <div className="p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="space-y-1">
-            <h2 className="text-xl font-bold text-[#333D29]">{project.name}</h2>
-            <p className="text-sm text-[#919588] font-medium">{project.type}</p>
+            <h2 className="text-xl font-bold text-accent">{project.name}</h2>
+            <p className="text-sm text-accent-muted font-medium">{project.type}</p>
           </div>
           <span
             className={`shrink-0 inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full ${
@@ -252,7 +252,7 @@ function ProjectCard({ project }: { project: Project }) {
                 ? "bg-amber-50 text-amber-800 border border-amber-200"
                 : project.status === "Active"
                   ? "bg-green-50 text-green-800 border border-green-200"
-                  : "bg-[#919588]/10 text-[#333D29] border border-[#919588]/20"
+                  : "bg-accent-light/10 text-foreground border border-accent-muted/20"
             }`}
           >
             {project.award && <span aria-hidden="true">🏆</span>}
@@ -266,19 +266,19 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
 
-        <p className="text-[#333D29]/90 leading-relaxed">{project.summary}</p>
+        <p className="text-foreground/90 leading-relaxed">{project.summary}</p>
 
         <div>
-          <h3 className="text-sm font-semibold text-[#333D29] mb-2">
+          <h3 className="text-sm font-semibold text-foreground mb-2">
             Key Contributions
           </h3>
           <ul className="grid sm:grid-cols-2 gap-1.5">
             {project.contributions.map((item) => (
               <li
                 key={item}
-                className="text-sm text-[#333D29]/80 flex items-start gap-2"
+                className="text-sm text-foreground/80 flex items-start gap-2"
               >
-                <span className="text-[#919588] mt-0.5">•</span>
+                <span className="text-accent-muted mt-0.5">•</span>
                 {item}
               </li>
             ))}
@@ -286,14 +286,14 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold text-[#333D29] mb-2">
+          <h3 className="text-sm font-semibold text-foreground mb-2">
             Technologies & Skills
           </h3>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
               <span
                 key={tech}
-                className="text-xs bg-[#919588]/10 text-[#333D29]/80 px-2.5 py-1 rounded-md"
+                className="text-xs bg-accent-light/10 text-foreground/80 px-2.5 py-1 rounded-md"
               >
                 {tech}
               </span>
@@ -314,25 +314,25 @@ export default function Projects() {
       <section aria-labelledby="projects-hero" className="space-y-4">
         <h1
           id="projects-hero"
-          className="text-3xl md:text-4xl font-bold text-[#333D29]"
+          className="text-3xl md:text-4xl font-bold text-accent"
         >
           Projects
         </h1>
-        <p className="text-lg text-[#333D29]/80 leading-relaxed max-w-2xl">
+        <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
           A collection of client work, product development, and hackathon
           projects spanning web development, software engineering, mobile apps,
           and AI — from business websites to award-winning builds.
         </p>
-        <div className="flex flex-wrap gap-4 text-sm text-[#919588]">
+        <div className="flex flex-wrap gap-4 text-sm text-accent-muted">
           <span>
-            <strong className="text-[#333D29]">{projects.length}</strong>{" "}
+            <strong className="text-foreground">{projects.length}</strong>{" "}
             projects
           </span>
           <span>
-            <strong className="text-[#333D29]">{activeCount}</strong> active
+            <strong className="text-foreground">{activeCount}</strong> active
           </span>
           <span>
-            <strong className="text-[#333D29]">{awardCount}</strong> award-winning
+            <strong className="text-foreground">{awardCount}</strong> award-winning
           </span>
         </div>
       </section>
@@ -345,7 +345,7 @@ export default function Projects() {
 
       <section
         aria-labelledby="projects-cta"
-        className="bg-[#919588] rounded-xl p-8 text-[#EFECE7] text-center space-y-4"
+        className="bg-accent rounded-xl p-8 text-surface text-center space-y-4"
       >
         <h2 id="projects-cta" className="text-xl font-bold">
           Want to learn more?
@@ -356,13 +356,13 @@ export default function Projects() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/about"
-            className="bg-[#F4F1DE] text-[#333D29] px-5 py-2 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
           >
             About Me
           </Link>
           <a
             href="mailto:hello@oliviabisset.com"
-            className="border border-[#EFECE7] text-[#EFECE7] px-5 py-2 rounded-md font-medium hover:bg-[#EFECE7]/10 transition-colors"
+            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
           >
             Contact Me
           </a>

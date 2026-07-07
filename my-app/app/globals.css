@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary */
+  --surface: #efece7;
+  --foreground: #333d29;
+
+  /* Accents (blue) */
+  --accent: #1e5681;
+  --accent-light: #537c9b;
+  --accent-muted: #87a1b4;
+  --accent-pale: #bbc7ce;
+
+  /* Neutrals (sage) */
+  --neutral: #c0c1b8;
+  --neutral-mid: #919588;
+  --neutral-dark: #626959;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-pale: var(--accent-pale);
+  --color-neutral: var(--neutral);
+  --color-neutral-mid: var(--neutral-mid);
+  --color-neutral-dark: var(--neutral-dark);
+  --color-background: var(--surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background: var(--surface);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Shared surface patterns — use palette visibly, not pure white/black */
+.card {
+  background-color: color-mix(in srgb, var(--accent-pale) 45%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent-muted) 50%, transparent);
+  border-radius: 0.75rem;
+}
+
+/* .section-band {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-light) 18%, var(--surface)),
+    color-mix(in srgb, var(--accent-pale) 55%, var(--surface))
+  );
+  border-top: 1px solid color-mix(in srgb, var(--accent-muted) 35%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-muted) 35%, transparent);
+} */
+
+.hero-band {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--accent) 22%, var(--surface)),
+    color-mix(in srgb, var(--accent-pale) 70%, var(--surface)) 55%,
+    var(--surface)
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-muted) 40%, transparent);
 }

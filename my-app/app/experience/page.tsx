@@ -64,7 +64,7 @@ const experiences: Experience[] = [
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-[#F4F1DE] text-[#333D29] px-3 py-1 rounded-full text-sm">
+    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
       {children}
     </span>
   );
@@ -72,10 +72,10 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function ExperienceCard({ experience }: { experience: Experience }) {
   return (
-    <article className="bg-white rounded-xl border border-[#919588]/20 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <article className="card overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       <div className="p-6 space-y-4">
         <div className="space-y-2">
-          <h2 className="text-xl font-bold text-[#333D29]">{experience.name}</h2>
+          <h2 className="text-xl font-bold text-accent">{experience.name}</h2>
           <div className="flex flex-wrap gap-2">
             {experience.category.map((cat) => (
               <Tag key={cat}>{cat}</Tag>
@@ -83,11 +83,11 @@ function ExperienceCard({ experience }: { experience: Experience }) {
           </div>
         </div>
 
-        <p className="text-[#333D29]/90 leading-relaxed">{experience.summary}</p>
+        <p className="text-foreground/90 leading-relaxed">{experience.summary}</p>
 
-        <div className="bg-[#F4F1DE]/30 rounded-lg p-4 border-l-4 border-[#919588]">
-          <h3 className="text-sm font-semibold text-[#333D29] mb-1">Impact</h3>
-          <p className="text-sm text-[#333D29]/85 leading-relaxed">
+        <div className="card p-4 border-l-4 border-l-accent">
+          <h3 className="text-sm font-semibold text-foreground mb-1">Impact</h3>
+          <p className="text-sm text-foreground/85 leading-relaxed">
             {experience.impact}
           </p>
         </div>
@@ -102,11 +102,11 @@ export default function ExperiencePage() {
       <section aria-labelledby="experience-hero" className="space-y-4">
         <h1
           id="experience-hero"
-          className="text-3xl md:text-4xl font-bold text-[#333D29]"
+          className="text-3xl md:text-4xl font-bold text-accent"
         >
           Experience
         </h1>
-        <p className="text-lg text-[#333D29]/80 leading-relaxed max-w-2xl">
+        <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
           Professional roles and engagements across enterprise software, SaaS
           product design, full-stack consulting, digital media production, and
           open-source community leadership.
@@ -121,7 +121,7 @@ export default function ExperiencePage() {
 
       <section
         aria-labelledby="experience-cta"
-        className="bg-[#919588] rounded-xl p-8 text-[#EFECE7] text-center space-y-4"
+        className="bg-accent rounded-xl p-8 text-surface text-center space-y-4"
       >
         <h2 id="experience-cta" className="text-xl font-bold">
           See the work behind the experience
@@ -132,13 +132,13 @@ export default function ExperiencePage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/projects"
-            className="bg-[#F4F1DE] text-[#333D29] px-5 py-2 rounded-md font-medium hover:bg-[#F4F1DE]/90 transition-colors"
+            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
           >
             View Projects
           </Link>
           <Link
             href="/about"
-            className="border border-[#EFECE7] text-[#EFECE7] px-5 py-2 rounded-md font-medium hover:bg-[#EFECE7]/10 transition-colors"
+            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
           >
             About Me
           </Link>
