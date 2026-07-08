@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ImpactStatsBanner from "../components/impact-stats-banner";
+import ContactForm from "../components/contact-form";
 
 export const metadata: Metadata = {
   title: "Olivia Bisset | Software Engineer & Digital Systems Builder",
@@ -30,6 +31,15 @@ const stats = [
     icon: "🌎",
     text: "WordCamp Speaker & Organizer advocating for youth in technology",
   },
+];
+
+const aboutParagraphs = [
+  "Hi, I'm Olivia, a software engineer with a passion for creating digital experiences that solve real problems.",
+  "My journey into technology began with a curiosity for how things work and has grown into a career centered around building websites, applications, and digital systems that help people and organizations succeed. From enterprise software used by internal teams to custom websites for growing businesses and award-winning AI projects, I enjoy turning complex ideas into intuitive, user-friendly solutions.",
+  "I believe great software is about more than writing code. It's about understanding the people who will use it, identifying the challenges they're facing, and creating technology that feels natural, reliable, and built with purpose.",
+  "Throughout my career, I've worked across a wide range of projects, including business websites, educational platforms, AI applications, administrative systems, and digital infrastructure. Each project has strengthened my belief that the best solutions come from combining thoughtful design with solid engineering.",
+  "When I'm not building software, I'm passionate about giving back to the technology community. I've organized hackathons, spoken at WordCamp events, mentored students, and advocated for creating more opportunities for the next generation of developers.",
+  "Whether you're looking for a modern website, a custom application, or a digital system tailored to your business, my goal is the same: to build something that not only looks great today but continues to create value for years to come.",
 ];
 
 const experienceHighlights = [
@@ -110,6 +120,34 @@ const processSteps = [
     title: "Launch",
     description:
       "After testing and refinement, we'll launch your project with confidence.",
+  },
+];
+
+const faqs = [
+  {
+    question: "What kinds of projects do you work on?",
+    answer:
+      "I specialize in custom websites, web applications, internal business tools, educational platforms, client portals, and digital systems. Whether you need a polished marketing site or a custom-built solution, I can help.",
+  },
+  {
+    question: "Do you redesign existing websites?",
+    answer:
+      "Absolutely. If your current website feels outdated, isn't converting visitors, or no longer reflects your business, I can redesign it with a modern look and improved functionality.",
+  },
+  {
+    question: "Do you only build websites?",
+    answer:
+      "No. While websites are a big part of what I do, I also develop custom dashboards, internal tools, client management systems, AI-powered applications, and other software tailored to your workflow.",
+  },
+  {
+    question: "What technologies do you use?",
+    answer:
+      "I work with modern technologies including Next.js, React, TypeScript, WordPress, Laravel, Python, Java, PostgreSQL, MySQL, Supabase, Tailwind CSS, and more. I choose the technology that best fits your project's needs.",
+  },
+  {
+    question: "How do we get started?",
+    answer:
+      "Simply reach out through the contact form below. We'll discuss your project, goals, timeline, and determine the best approach before development begins.",
   },
 ];
 
@@ -494,6 +532,68 @@ export default function Home() {
               ))}
             </ol>
           </div>
+        </section>
+
+        <section
+          aria-labelledby="faq-heading"
+          className="mx-auto max-w-3xl px-6 py-20 md:py-28"
+        >
+          <SectionHeading id="faq-heading" centered>
+            Frequently Asked Questions
+          </SectionHeading>
+          <div className="space-y-4">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="card group p-6">
+                <summary className="cursor-pointer list-none text-lg font-bold text-foreground [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-center justify-between gap-4">
+                    {faq.question}
+                    <span
+                      aria-hidden
+                      className="shrink-0 text-accent transition-transform group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="about-heading"
+          className="section-band px-6 py-20 md:py-28"
+        >
+          <div className="mx-auto max-w-3xl">
+            <SectionHeading id="about-heading" centered>
+              About
+            </SectionHeading>
+            <div className="space-y-6 text-lg leading-relaxed text-foreground/90">
+              <p className="text-xl font-medium text-foreground">
+                {aboutParagraphs[0]}
+              </p>
+              {aboutParagraphs.slice(1).map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="contact-heading"
+          className="mx-auto max-w-3xl px-6 py-20 md:py-28"
+        >
+          <SectionHeading id="contact-heading" centered>
+            Contact Me
+          </SectionHeading>
+          <p className="mb-10 text-center text-lg leading-relaxed text-foreground/85">
+            Have a project in mind? Fill out the form below and I&apos;ll get
+            back to you.
+          </p>
+          <ContactForm />
         </section>
     </main>
   );
