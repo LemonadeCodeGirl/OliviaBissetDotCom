@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  /* Primary */
-  --surface: #efece7;
-  --foreground: #333d29;
+  /* Coolors palette: b4b8ab · 153243 · 284b63 · f4f9e9 · eef0eb */
+  --palette-sage: #b4b8ab;
+  --palette-navy: #153243;
+  --palette-teal: #284b63;
+  --palette-mint: #f4f9e9;
+  --palette-cream: #eef0eb;
 
-  /* Accents (blue) */
-  --accent: #1e5681;
-  --accent-light: #537c9b;
-  --accent-muted: #87a1b4;
-  --accent-pale: #bbc7ce;
+  /* Semantic tokens */
+  --surface: var(--palette-cream);
+  --foreground: var(--palette-navy);
 
-  /* Neutrals (sage) */
-  --neutral: #c0c1b8;
-  --neutral-mid: #919588;
-  --neutral-dark: #626959;
+  --accent: var(--palette-teal);
+  --accent-light: #3a6580;
+  --accent-muted: var(--palette-sage);
+  --accent-pale: var(--palette-mint);
+
+  --neutral: var(--palette-sage);
+  --neutral-mid: #8a8f82;
+  --neutral-dark: #3d4a42;
 }
 
 @theme inline {
@@ -45,22 +50,70 @@ body {
   border-radius: 0.75rem;
 }
 
-/* .section-band {
+.section-band {
   background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--accent-light) 18%, var(--surface)),
-    color-mix(in srgb, var(--accent-pale) 55%, var(--surface))
+    180deg,
+    var(--surface) 0%,
+    color-mix(in srgb, var(--accent-pale) 35%, var(--surface)) 40%,
+    var(--surface) 100%
   );
-  border-top: 1px solid color-mix(in srgb, var(--accent-muted) 35%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--accent-muted) 35%, transparent);
-} */
+  border-top: 1px solid color-mix(in srgb, var(--accent-muted) 30%, transparent);
+}
 
 .hero-band {
   background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-light) 100%, var(--surface)),
-    color-mix(in srgb, var(--accent-pale) 70%, var(--surface)) 55%,
-    var(--surface)
+    145deg,
+    var(--palette-navy) 0%,
+    var(--palette-teal) 50%,
+    color-mix(in srgb, var(--palette-navy) 90%, var(--palette-teal)) 100%
   );
-  /* borde  r-bottom: 1px solid color-mix(in srgb, var(--accent-muted) 40%, transparent); */
+}
+
+.stats-banner {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.stats-banner-track {
+  animation: stats-banner-scroll 40s linear infinite;
+}
+
+.stats-banner-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes stats-banner-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-banner {
+    overflow: visible;
+    mask-image: none;
+  }
+
+  .stats-banner-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    max-width: 72rem;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+
+  .stats-banner-duplicate {
+    display: none;
+  }
 }

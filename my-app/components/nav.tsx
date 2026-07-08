@@ -36,7 +36,7 @@ export default function Nav() {
           </Link>
         </h1>
       </div>
-      <div className="flex flex-row gap-4 flex-end pr-3">
+      {/* <div className="flex flex-row gap-4 flex-end pr-3">
         <Link
           href="/about"
           className={
@@ -78,7 +78,7 @@ export default function Nav() {
         >
           Contact
         </Link>
-      </div>
+      </div> */}
     </nav>
   );
 }
