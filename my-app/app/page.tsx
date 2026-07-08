@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ImpactStatsBanner from "../components/impact-stats-banner";
 import ContactForm from "../components/contact-form";
+import SectionHeader from "../components/section-header";
+import { cardTint } from "../components/card-tints";
 
 export const metadata: Metadata = {
   title: "Olivia Bisset | Software Engineer & Digital Systems Builder",
@@ -237,35 +239,6 @@ const communityHighlights = [
   "WordCamp Miami & Orlando Organizer",
 ];
 
-function SectionHeading({
-  children,
-  id,
-  centered,
-}: {
-  children: React.ReactNode;
-  id?: string;
-  centered?: boolean;
-}) {
-  return (
-    <h2
-      id={id}
-      className={
-        centered
-          ? "mb-6 text-center text-2xl font-bold text-accent"
-          : "mb-6 border-b-2 border-accent-light/50 pb-2 text-2xl font-bold text-accent"
-      }
-    >
-      {children}
-      {centered && (
-        <span
-          aria-hidden
-          className="mx-auto mt-3 block h-0.5 w-16 bg-accent-light/50"
-        />
-      )}
-    </h2>
-  );
-}
-
 function PrimaryButton({
   href,
   children,
@@ -312,6 +285,7 @@ function SecondaryButton({
 
 function ProjectCard({
   project,
+  tintIndex,
 }: {
   project: {
     name: string;
@@ -320,20 +294,25 @@ function ProjectCard({
     meta: string;
     award?: boolean;
   };
+  tintIndex: number;
 }) {
   return (
-    <div className="card flex h-full flex-col p-6">
+    <div
+      className={`card card-interactive ${cardTint(tintIndex)} flex h-full flex-col rounded-2xl p-6`}
+    >
       {project.award && (
-        <span className="mb-3 w-fit rounded-full bg-accent-pale px-2.5 py-0.5 text-xs font-semibold text-accent">
+        <span className="mb-3 w-fit rounded-full bg-accent-pale px-3 py-1 text-xs font-semibold text-accent">
           Award Winner
         </span>
       )}
-      <h3 className="text-lg font-bold text-foreground">{project.name}</h3>
-      <p className="mb-3 text-sm font-medium text-accent">{project.subtitle}</p>
+      <h3 className="text-lg font-bold tracking-tight text-foreground">
+        {project.name}
+      </h3>
+      <p className="mb-3 text-sm font-semibold text-accent">{project.subtitle}</p>
       <p className="mb-4 flex-1 text-sm leading-relaxed text-foreground/80">
         {project.description}
       </p>
-      <p className="text-xs text-neutral-dark">{project.meta}</p>
+      <p className="text-xs font-medium text-neutral-mid">{project.meta}</p>
     </div>
   );
 }
@@ -430,24 +409,33 @@ export default function Home() {
 
         <section
           aria-labelledby="experience-highlights-heading"
-          className="section-band px-6 py-20 md:py-28"
+          className="section-plain px-6 py-20 md:py-28"
         >
           <div className="mx-auto max-w-6xl">
-            <SectionHeading id="experience-highlights-heading" centered>
-              Experience Highlights
-            </SectionHeading>
-            <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-foreground/85">
-              Over the past several years, I&apos;ve had the opportunity to work
-              with established companies, startups, educational organizations,
-              and nonprofits to design, develop, and improve digital experiences.
-            </p>
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {experienceHighlights.map((highlight) => (
-                <li key={highlight.title} className="card p-5">
-                  <h3 className="font-bold text-foreground">
+            <SectionHeader
+              id="experience-highlights-heading"
+              eyebrow="Background"
+              title={
+                <>
+                  Experience{" "}
+                  <span className="text-accent">Highlights</span>
+                </>
+              }
+              description="Over the past several years, I've had the opportunity to work with established companies, startups, educational organizations, and nonprofits to design, develop, and improve digital experiences."
+              centered
+            />
+            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {experienceHighlights.map((highlight, index) => (
+                <li
+                  key={highlight.title}
+                  className={`card card-interactive ${cardTint(index)} rounded-2xl p-6`}
+                >
+                  <h3 className="font-bold tracking-tight text-foreground">
                     {highlight.title}
                   </h3>
-                  <p className="mt-1 text-sm text-accent">{highlight.detail}</p>
+                  <p className="mt-2 text-sm font-medium text-accent">
+                    {highlight.detail}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -460,31 +448,38 @@ export default function Home() {
           aria-labelledby="services-heading"
           className="section-band px-6 py-20 md:py-28"
         >
-          <div className="mx-auto max-w-6xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-              Services
-            </p>
-            <SectionHeading id="services-heading" centered>
-              What I Do
-            </SectionHeading>
-            <h3 className="mb-8 mt-2 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              More Than Just Code
-            </h3>
-            <div className="mx-auto mb-12 max-w-3xl space-y-6 text-lg leading-relaxed">
-              <p className="text-foreground/85">
-                I don&apos;t simply build websites. I work to understand your
-                goals, identify opportunities, and create solutions that are
-                intuitive, scalable, and easy to maintain.
-              </p>
-              <p className="font-medium text-foreground">
-                Every project is built with attention to performance,
-                accessibility, and long-term growth.
-              </p>
-            </div>
-            <ul className="grid gap-6 text-left md:grid-cols-3">
-              {services.map((service) => (
-                <li key={service.title} className="card p-6">
-                  <h3 className="mb-3 text-lg font-bold text-foreground">
+          <div className="mx-auto max-w-6xl">
+            <SectionHeader
+              id="services-heading"
+              eyebrow="Services"
+              title={
+                <>
+                  More than just{" "}
+                  <span className="text-accent">code</span>
+                </>
+              }
+              description={
+                <>
+                  <p>
+                    I don&apos;t simply build websites. I work to understand your
+                    goals, identify opportunities, and create solutions that are
+                    intuitive, scalable, and easy to maintain.
+                  </p>
+                  <p className="mt-4 font-medium text-foreground">
+                    Every project is built with attention to performance,
+                    accessibility, and long-term growth.
+                  </p>
+                </>
+              }
+              centered
+            />
+            <ul className="grid gap-6 md:grid-cols-3">
+              {services.map((service, index) => (
+                <li
+                  key={service.title}
+                  className={`card card-interactive ${cardTint(index + 1)} rounded-2xl p-6 text-left`}
+                >
+                  <h3 className="mb-3 text-lg font-bold tracking-tight text-foreground">
                     {service.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-foreground/80">
@@ -496,30 +491,54 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <SectionHeading centered>My Projects</SectionHeading>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {featuredProjects.map((project) => (
-                    <ProjectCard key={project.name} project={project} />
-                ))}
+        <section className="section-plain px-6 py-20 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <SectionHeader
+              eyebrow="Portfolio"
+              title={
+                <>
+                  Featured{" "}
+                  <span className="text-accent">Projects</span>
+                </>
+              }
+              description="A selection of websites, platforms, and applications built for clients, organizations, and hackathon teams."
+              centered
+            />
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {featuredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.name}
+                  project={project}
+                  tintIndex={index}
+                />
+              ))}
             </div>
+          </div>
         </section>
 
         <section
           aria-labelledby="process-heading"
           className="section-band px-6 py-20 md:py-28"
         >
-          <div className="mx-auto max-w-6xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-              Process
-            </p>
-            <SectionHeading id="process-heading" centered>
-              How We Work Together
-            </SectionHeading>
-            <ol className="mt-4 grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
-              {processSteps.map((step) => (
-                <li key={step.title} className="card p-6">
-                  <span className="mb-3 block text-3xl font-bold text-accent">
+          <div className="mx-auto max-w-6xl">
+            <SectionHeader
+              id="process-heading"
+              eyebrow="Process"
+              title={
+                <>
+                  How we work{" "}
+                  <span className="text-accent">together</span>
+                </>
+              }
+              centered
+            />
+            <ol className="grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <li
+                  key={step.title}
+                  className={`card card-interactive ${cardTint(index + 2)} rounded-2xl p-6`}
+                >
+                  <span className="mb-3 block text-3xl font-bold tracking-tight text-accent">
                     {step.step}
                   </span>
                   <h3 className="mb-2 text-lg font-bold text-foreground">
@@ -536,30 +555,43 @@ export default function Home() {
 
         <section
           aria-labelledby="faq-heading"
-          className="mx-auto max-w-3xl px-6 py-20 md:py-28"
+          className="section-plain px-6 py-20 md:py-28"
         >
-          <SectionHeading id="faq-heading" centered>
-            Frequently Asked Questions
-          </SectionHeading>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="card group p-6">
-                <summary className="cursor-pointer list-none text-lg font-bold text-foreground [&::-webkit-details-marker]:hidden">
-                  <span className="flex items-center justify-between gap-4">
-                    {faq.question}
-                    <span
-                      aria-hidden
-                      className="shrink-0 text-accent transition-transform group-open:rotate-45"
-                    >
-                      +
+          <div className="mx-auto max-w-3xl">
+            <SectionHeader
+              id="faq-heading"
+              eyebrow="FAQ"
+              title={
+                <>
+                  Frequently asked{" "}
+                  <span className="text-accent">questions</span>
+                </>
+              }
+              centered
+            />
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <details
+                  key={faq.question}
+                  className={`card group ${index % 2 === 0 ? "card-tint-cream" : "card-tint-blue"} rounded-2xl p-6 open:border-accent-muted/60`}
+                >
+                  <summary className="cursor-pointer list-none text-lg font-bold text-foreground [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-center justify-between gap-4">
+                      {faq.question}
+                      <span
+                        aria-hidden
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-pale text-accent transition-transform group-open:rotate-45"
+                      >
+                        +
+                      </span>
                     </span>
-                  </span>
-                </summary>
-                <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
+                  </summary>
+                  <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -568,10 +600,18 @@ export default function Home() {
           className="section-band px-6 py-20 md:py-28"
         >
           <div className="mx-auto max-w-3xl">
-            <SectionHeading id="about-heading" centered>
-              About
-            </SectionHeading>
-            <div className="space-y-6 text-lg leading-relaxed text-foreground/90">
+            <SectionHeader
+              id="about-heading"
+              eyebrow="About"
+              title={
+                <>
+                  Building with{" "}
+                  <span className="text-accent">purpose</span>
+                </>
+              }
+              centered
+            />
+            <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
               <p className="text-xl font-medium text-foreground">
                 {aboutParagraphs[0]}
               </p>
@@ -584,16 +624,23 @@ export default function Home() {
 
         <section
           aria-labelledby="contact-heading"
-          className="mx-auto max-w-3xl px-6 py-20 md:py-28"
+          className="section-plain px-6 py-20 md:py-28"
         >
-          <SectionHeading id="contact-heading" centered>
-            Contact Me
-          </SectionHeading>
-          <p className="mb-10 text-center text-lg leading-relaxed text-foreground/85">
-            Have a project in mind? Fill out the form below and I&apos;ll get
-            back to you.
-          </p>
-          <ContactForm />
+          <div className="mx-auto max-w-3xl">
+            <SectionHeader
+              id="contact-heading"
+              eyebrow="Get in Touch"
+              title={
+                <>
+                  Let&apos;s build something{" "}
+                  <span className="text-accent">great</span>
+                </>
+              }
+              description="Have a project in mind? Fill out the form below and I'll get back to you."
+              centered
+            />
+            <ContactForm />
+          </div>
         </section>
     </main>
   );

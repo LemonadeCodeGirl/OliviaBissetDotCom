@@ -1,5 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import PageHero from "../../components/page-hero";
+import SectionHeader from "../../components/section-header";
+import CtaBand from "../../components/cta-band";
+import { cardTint } from "../../components/card-tints";
 
 export const metadata: Metadata = {
   title: "About | Olivia Bisset",
@@ -128,26 +131,9 @@ const specialties = [
   "Community Leadership",
 ];
 
-function SectionHeading({
-  children,
-  id,
-}: {
-  children: React.ReactNode;
-  id?: string;
-}) {
-  return (
-    <h2
-      id={id}
-      className="text-2xl font-bold text-accent border-b-2 border-accent-light/50 pb-2 mb-6"
-    >
-      {children}
-    </h2>
-  );
-}
-
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
+    <span className="inline-block rounded-full border border-accent-muted/40 bg-accent-pale/60 px-3 py-1 text-sm font-medium text-accent">
       {children}
     </span>
   );
@@ -155,36 +141,35 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export default function About() {
   return (
-    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-16">
-      {/* Hero Section */}
-      <section aria-labelledby="about-hero" className="space-y-8">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+    <main>
+      <PageHero
+        id="about-hero"
+        eyebrow="About Me"
+        title={
+          <>
+            Turning ideas into{" "}
+            <span className="text-accent-muted">reliable reality</span>
+          </>
+        }
+        description="Building thoughtful digital experiences through code and design."
+      />
+
+      <section
+        aria-labelledby="about-intro"
+        className="section-band px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto flex max-w-4xl flex-col items-start gap-10 md:flex-row">
           <div className="shrink-0">
             <div
-              className="w-40 h-40 rounded-full bg-accent-light/20 border-4 border-accent-muted/40 flex items-center justify-center"
+              className="flex h-40 w-40 items-center justify-center rounded-2xl border-2 border-accent-muted/40 bg-accent-pale/40 shadow-lg"
               aria-label="Profile photo placeholder"
             >
               <span className="text-4xl font-bold text-accent-muted">OB</span>
             </div>
-            <p className="text-sm text-accent-muted mt-2 text-center">
-              Professional headshot
-            </p>
           </div>
 
-          <div className="flex-1 space-y-4">
-            <p className="text-sm uppercase tracking-widest text-accent-muted font-medium">
-              Software Engineer & Web Developer
-            </p>
-            <h1
-              id="about-hero"
-              className="text-3xl md:text-4xl font-bold text-accent leading-tight"
-            >
-              Turning your ideas into reliable reality
-            </h1>
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              Building thoughtful digital experiences through code and design.
-            </p>
-            <p className="text-foreground/90 leading-relaxed">
+          <div className="flex-1 space-y-5">
+            <p className="text-lg leading-relaxed text-foreground/85">
               I&apos;m a software engineer and web developer who enjoys building
               digital experiences that are both technically sound and easy to
               use. With a background in full-stack software development, UI/UX
@@ -192,7 +177,7 @@ export default function About() {
               bringing ideas from concept to completion while keeping the user
               at the center of every decision.
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-2">
               {specialties.map((topic) => (
                 <Tag key={topic}>{topic}</Tag>
               ))}
@@ -201,9 +186,12 @@ export default function About() {
         </div>
       </section>
 
-      {/* My Story */}
-      <section aria-labelledby="my-story">
-        <SectionHeading id="my-story">My Story</SectionHeading>
+      <section
+        aria-labelledby="my-story"
+        className="section-plain px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="my-story" title="My Story" />
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             My journey into technology started with web development, where I
@@ -238,17 +226,21 @@ export default function About() {
             that make technology feel approachable and useful.
           </p>
         </div>
+        </div>
       </section>
 
-      {/* What I Do */}
-      <section aria-labelledby="what-i-do">
-        <SectionHeading id="what-i-do">What I Do</SectionHeading>
-        <div className="grid md:grid-cols-3 gap-6">
-          {whatIDo.map((category) => (
-            <div
-              key={category.title}
-              className="card p-5"
-            >
+      <section
+        aria-labelledby="what-i-do"
+        className="section-band px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="what-i-do" title="What I Do" />
+          <div className="grid gap-6 md:grid-cols-3">
+            {whatIDo.map((category, index) => (
+              <div
+                key={category.title}
+                className={`card card-interactive ${cardTint(index)} rounded-2xl p-6`}
+              >
               <h3 className="font-bold text-foreground mb-3">{category.title}</h3>
               <ul className="space-y-2">
                 {category.items.map((item) => (
@@ -263,13 +255,17 @@ export default function About() {
               </ul>
             </div>
           ))}
+          </div>
         </div>
       </section>
 
-      {/* My Approach */}
-      <section aria-labelledby="my-approach">
-        <SectionHeading id="my-approach">My Approach</SectionHeading>
-        <div className="space-y-4 text-foreground/90 leading-relaxed card p-6 border-l-4 border-l-accent">
+      <section
+        aria-labelledby="my-approach"
+        className="section-plain px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="my-approach" title="My Approach" />
+          <div className="card card-tint-accent space-y-4 rounded-2xl border-l-4 border-l-accent p-6 leading-relaxed text-foreground/90">
           <p>
             Every project starts with understanding the problem before writing a
             single line of code. I believe the best solutions come from asking
@@ -291,12 +287,16 @@ export default function About() {
             collaborating with others, my goal is always the same: build
             something reliable, thoughtful, and worth using.
           </p>
+          </div>
         </div>
       </section>
 
-      {/* Skills Snapshot */}
-      <section aria-labelledby="skills-snapshot">
-        <SectionHeading id="skills-snapshot">Skills Snapshot</SectionHeading>
+      <section
+        aria-labelledby="skills-snapshot"
+        className="section-band px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="skills-snapshot" title="Skills Snapshot" />
         <div className="grid sm:grid-cols-2 gap-6">
           {skillCategories.map((category) => (
             <div key={category.title}>
@@ -311,40 +311,47 @@ export default function About() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Experience Highlights */}
-      <section aria-labelledby="experience-highlights">
-        <SectionHeading id="experience-highlights">
-          Experience Highlights
-        </SectionHeading>
-        <p className="text-foreground/90 leading-relaxed mb-6">
-          My experience spans software engineering internships, freelance web
-          development, UI/UX projects, WordPress consulting, and product
-          development — each contributing to a well-rounded perspective on
-          building software that works for real people.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {experienceHighlights.map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center card p-4"
-            >
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-sm font-medium text-foreground/80 mt-1">
-                {stat.label}
-              </p>
-              <p className="text-xs text-accent-muted mt-1">{stat.detail}</p>
-            </div>
-          ))}
         </div>
       </section>
 
-      {/* Leadership & Community */}
-      <section aria-labelledby="leadership-community">
-        <SectionHeading id="leadership-community">
-          Leadership & Community
-        </SectionHeading>
+      <section
+        aria-labelledby="experience-highlights"
+        className="section-plain px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader
+            id="experience-highlights"
+            title={
+              <>
+                Experience{" "}
+                <span className="text-accent">Highlights</span>
+              </>
+            }
+            description="My experience spans software engineering internships, freelance web development, UI/UX projects, WordPress consulting, and product development — each contributing to a well-rounded perspective on building software that works for real people."
+          />
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {experienceHighlights.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`card ${cardTint(index + 1)} rounded-2xl p-5 text-center`}
+              >
+                <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                <p className="mt-1 text-sm font-medium text-foreground/80">
+                  {stat.label}
+                </p>
+                <p className="mt-1 text-xs text-accent-muted">{stat.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="leadership-community"
+        className="section-band px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="leadership-community" title="Leadership & Community" />
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             {communityRoles.map((role) => (
@@ -360,11 +367,15 @@ export default function About() {
             constantly learning from the people around me.
           </p>
         </div>
+        </div>
       </section>
 
-      {/* Beyond the Code */}
-      <section aria-labelledby="beyond-the-code">
-        <SectionHeading id="beyond-the-code">Beyond the Code</SectionHeading>
+      <section
+        aria-labelledby="beyond-the-code"
+        className="section-plain px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="beyond-the-code" title="Beyond the Code" />
         <p className="text-foreground/90 leading-relaxed mb-4">
           When I&apos;m not writing code, you&apos;ll find me exploring creative
           outlets and staying curious about the world around me.
@@ -374,11 +385,15 @@ export default function About() {
             <Tag key={item}>{item}</Tag>
           ))}
         </div>
+        </div>
       </section>
 
-      {/* Current Focus */}
-      <section aria-labelledby="current-focus">
-        <SectionHeading id="current-focus">Current Focus</SectionHeading>
+      <section
+        aria-labelledby="current-focus"
+        className="section-band px-6 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader id="current-focus" title="Current Focus" />
         <ul className="space-y-2">
           {currentFocus.map((item) => (
             <li
@@ -390,57 +405,24 @@ export default function About() {
             </li>
           ))}
         </ul>
-      </section>
-
-      {/* Call To Action */}
-      <section
-        aria-labelledby="cta"
-        className="bg-accent rounded-xl p-8 text-surface text-center space-y-6"
-      >
-        <h2 id="cta" className="text-2xl font-bold">
-          Let&apos;s Connect
-        </h2>
-        <p className="max-w-lg mx-auto opacity-90">
-          Interested in working together or just want to say hello? I&apos;d
-          love to hear from you.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/projects"
-            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
-          >
-            View Projects
-          </Link>
-          <a
-            href="/resume.pdf"
-            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
-          >
-            Download Resume
-          </a>
-          <a
-            href="mailto:hello@oliviabisset.com"
-            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
-          >
-            Contact Me
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
-          >
-            GitHub
-          </a>
         </div>
       </section>
+
+      <CtaBand
+        id="cta"
+        title="Let's Connect"
+        description="Interested in working together or just want to say hello? I'd love to hear from you."
+        links={[
+          { href: "/projects", label: "View Projects" },
+          { href: "/contact", label: "Contact Me" },
+          {
+            href: "https://linkedin.com",
+            label: "LinkedIn",
+            external: true,
+            variant: "secondary",
+          },
+        ]}
+      />
     </main>
   );
 }

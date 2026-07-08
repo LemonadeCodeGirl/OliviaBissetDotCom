@@ -1,9 +1,9 @@
 "use client";
 
 const inputClassName =
-  "w-full rounded-lg border border-accent-muted/50 bg-white px-4 py-2.5 text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+  "w-full rounded-xl border border-accent-muted/40 bg-surface/50 px-4 py-3 text-foreground placeholder:text-foreground/40 transition-colors focus:border-accent focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/15";
 
-const labelClassName = "mb-1.5 block text-sm font-medium text-foreground";
+const labelClassName = "mb-2 block text-sm font-semibold text-foreground";
 
 export default function ContactForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -11,7 +11,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card space-y-6 p-6 md:p-8">
+    <form
+      onSubmit={handleSubmit}
+      className="card card-tint-cream space-y-6 rounded-2xl p-6 md:p-8"
+    >
       <div>
         <label htmlFor="name" className={labelClassName}>
           Name
@@ -95,7 +98,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full rounded-full bg-accent px-6 py-3 font-medium text-accent-pale transition-colors hover:bg-accent-light md:w-auto"
+        className="w-full rounded-full bg-accent px-6 py-3 font-medium text-surface shadow-sm transition-colors hover:bg-accent-light md:w-auto"
       >
         Send Message
       </button>

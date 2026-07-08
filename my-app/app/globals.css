@@ -1,25 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  /* Coolors palette: b4b8ab · 153243 · 284b63 · f4f9e9 · eef0eb */
-  --palette-sage: #b4b8ab;
-  --palette-navy: #153243;
-  --palette-teal: #284b63;
-  --palette-mint: #f4f9e9;
-  --palette-cream: #eef0eb;
+  /* Coolors palette: 1e5681 · 537c9b · 87a1b4 · bbc7ce · efece7 · c0c1b8 · 919588 · 626959 · 333d29 */
+  --palette-blue-deep: #1e5681;
+  --palette-blue: #537c9b;
+  --palette-blue-light: #87a1b4;
+  --palette-blue-pale: #bbc7ce;
+  --palette-cream: #efece7;
+  --palette-sage: #c0c1b8;
+  --palette-olive-mid: #919588;
+  --palette-olive: #626959;
+  --palette-forest: #333d29;
 
   /* Semantic tokens */
   --surface: var(--palette-cream);
-  --foreground: var(--palette-navy);
+  --foreground: var(--palette-forest);
 
-  --accent: var(--palette-teal);
-  --accent-light: #3a6580;
-  --accent-muted: var(--palette-sage);
-  --accent-pale: var(--palette-mint);
+  --accent: var(--palette-blue-deep);
+  --accent-light: var(--palette-blue);
+  --accent-muted: var(--palette-blue-light);
+  --accent-pale: var(--palette-blue-pale);
 
   --neutral: var(--palette-sage);
-  --neutral-mid: #8a8f82;
-  --neutral-dark: #3d4a42;
+  --neutral-mid: var(--palette-olive-mid);
+  --neutral-dark: var(--palette-olive);
 }
 
 @theme inline {
@@ -40,14 +44,71 @@
 body {
   background: var(--surface);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 /* Shared surface patterns — use palette visibly, not pure white/black */
 .card {
   background-color: white;
-  border: 1px solid color-mix(in srgb, var(--accent-muted) 50%, transparent);
-  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--accent-muted) 40%, transparent);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--palette-forest) 5%, transparent);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-interactive:hover {
+  border-color: color-mix(in srgb, var(--accent-muted) 65%, transparent);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--palette-forest) 9%, transparent);
+  transform: translateY(-2px);
+}
+
+/* Palette-tinted card variants */
+.card-tint-blue {
+  background-color: color-mix(in srgb, var(--palette-blue-pale) 34%, white);
+  border-color: color-mix(in srgb, var(--palette-blue-light) 42%, transparent);
+}
+
+.card-tint-sage {
+  background-color: color-mix(in srgb, var(--palette-sage) 30%, white);
+  border-color: color-mix(in srgb, var(--palette-sage) 52%, transparent);
+}
+
+.card-tint-cream {
+  background-color: color-mix(in srgb, var(--palette-cream) 75%, white);
+  border-color: color-mix(in srgb, var(--palette-olive-mid) 30%, transparent);
+}
+
+.card-tint-accent {
+  background-color: color-mix(in srgb, var(--palette-blue) 15%, white);
+  border-color: color-mix(in srgb, var(--palette-blue) 34%, transparent);
+}
+
+.card-tint-forest {
+  background-color: color-mix(in srgb, var(--palette-olive) 12%, white);
+  border-color: color-mix(in srgb, var(--palette-olive) 32%, transparent);
+}
+
+.card-interactive.card-tint-blue:hover {
+  background-color: color-mix(in srgb, var(--palette-blue-pale) 44%, white);
+}
+
+.card-interactive.card-tint-sage:hover {
+  background-color: color-mix(in srgb, var(--palette-sage) 40%, white);
+}
+
+.card-interactive.card-tint-cream:hover {
+  background-color: color-mix(in srgb, var(--palette-cream) 88%, white);
+}
+
+.card-interactive.card-tint-accent:hover {
+  background-color: color-mix(in srgb, var(--palette-blue) 22%, white);
+}
+
+.card-interactive.card-tint-forest:hover {
+  background-color: color-mix(in srgb, var(--palette-olive) 18%, white);
 }
 
 .section-band {
@@ -60,12 +121,32 @@ body {
   border-top: 1px solid color-mix(in srgb, var(--accent-muted) 30%, transparent);
 }
 
+.section-plain {
+  border-top: 1px solid color-mix(in srgb, var(--accent-muted) 20%, transparent);
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow-light {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-muted);
+}
+
 .hero-band {
   background: linear-gradient(
     145deg,
-    var(--palette-navy) 0%,
-    var(--palette-teal) 50%,
-    color-mix(in srgb, var(--palette-navy) 90%, var(--palette-teal)) 100%
+    var(--palette-forest) 0%,
+    var(--palette-blue-deep) 48%,
+    var(--palette-blue) 100%
   );
 }
 

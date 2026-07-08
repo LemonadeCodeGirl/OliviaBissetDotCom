@@ -1,5 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import PageHero from "../../components/page-hero";
+import CtaBand from "../../components/cta-band";
+import { cardTint } from "../../components/card-tints";
 
 export const metadata: Metadata = {
   title: "Projects | Olivia Bisset",
@@ -231,15 +233,23 @@ const projects: Project[] = [
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
+    <span className="inline-block rounded-full border border-accent-muted/40 bg-accent-pale/60 px-3 py-1 text-sm font-medium text-accent">
       {children}
     </span>
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  tintIndex,
+}: {
+  project: Project;
+  tintIndex: number;
+}) {
   return (
-    <article className="card overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <article
+      className={`card card-interactive ${cardTint(tintIndex)} overflow-hidden rounded-2xl`}
+    >
       <div className="p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="space-y-1">
@@ -310,64 +320,53 @@ export default function Projects() {
   const awardCount = projects.filter((p) => p.award).length;
 
   return (
-    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-12">
-      <section aria-labelledby="projects-hero" className="space-y-4">
-        <h1
-          id="projects-hero"
-          className="text-3xl md:text-4xl font-bold text-accent"
-        >
-          Projects
-        </h1>
-        <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
-          A collection of client work, product development, and hackathon
-          projects spanning web development, software engineering, mobile apps,
-          and AI — from business websites to award-winning builds.
-        </p>
-        <div className="flex flex-wrap gap-4 text-sm text-accent-muted">
+    <main>
+      <PageHero
+        id="projects-hero"
+        eyebrow="Portfolio"
+        title={
+          <>
+            Selected{" "}
+            <span className="text-accent-muted">Projects</span>
+          </>
+        }
+        description="A collection of client work, product development, and hackathon projects spanning web development, software engineering, mobile apps, and AI."
+      >
+        <div className="flex flex-wrap justify-center gap-6 pt-2 text-sm text-accent-muted">
           <span>
-            <strong className="text-foreground">{projects.length}</strong>{" "}
+            <strong className="text-accent-pale">{projects.length}</strong>{" "}
             projects
           </span>
           <span>
-            <strong className="text-foreground">{activeCount}</strong> active
+            <strong className="text-accent-pale">{activeCount}</strong> active
           </span>
           <span>
-            <strong className="text-foreground">{awardCount}</strong> award-winning
+            <strong className="text-accent-pale">{awardCount}</strong>{" "}
+            award-winning
           </span>
         </div>
-      </section>
-
-      <section aria-label="Project list" className="space-y-6">
-        {projects.map((project) => (
-          <ProjectCard key={project.name} project={project} />
-        ))}
-      </section>
+      </PageHero>
 
       <section
-        aria-labelledby="projects-cta"
-        className="bg-accent rounded-xl p-8 text-surface text-center space-y-4"
+        aria-label="Project list"
+        className="section-band px-6 py-16 md:py-20"
       >
-        <h2 id="projects-cta" className="text-xl font-bold">
-          Want to learn more?
-        </h2>
-        <p className="opacity-90 max-w-md mx-auto">
-          Explore my background or get in touch to discuss a project.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/about"
-            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
-          >
-            About Me
-          </Link>
-          <a
-            href="mailto:hello@oliviabisset.com"
-            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
-          >
-            Contact Me
-          </a>
+        <div className="mx-auto max-w-4xl space-y-6">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.name} project={project} tintIndex={index} />
+          ))}
         </div>
       </section>
+
+      <CtaBand
+        id="projects-cta"
+        title="Want to learn more?"
+        description="Explore my background or get in touch to discuss a project."
+        links={[
+          { href: "/about", label: "About Me" },
+          { href: "/contact", label: "Contact Me", variant: "secondary" },
+        ]}
+      />
     </main>
   );
 }

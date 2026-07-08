@@ -25,7 +25,7 @@ export default function Nav() {
         "flex flex-row justify-between items-center p-3",
         "transition-[background-color,box-shadow,color] duration-300 ease-in-out",
         blendWithHero
-          ? "bg-transparent shadow-none text-[#EFECE7]"
+          ? "bg-transparent shadow-none text-surface"
           : "bg-surface/90 backdrop-blur-md text-foreground border-b border-accent-muted",
       ].join(" ")}
     >

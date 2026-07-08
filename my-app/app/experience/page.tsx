@@ -1,5 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import PageHero from "../../components/page-hero";
+import CtaBand from "../../components/cta-band";
+import { cardTint } from "../../components/card-tints";
 
 export const metadata: Metadata = {
   title: "Experience | Olivia Bisset",
@@ -64,15 +66,23 @@ const experiences: Experience[] = [
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-accent-light/25 text-accent px-3 py-1 rounded-full text-sm border border-accent-muted/40">
+    <span className="inline-block rounded-full border border-accent-muted/40 bg-accent-pale/60 px-3 py-1 text-sm font-medium text-accent">
       {children}
     </span>
   );
 }
 
-function ExperienceCard({ experience }: { experience: Experience }) {
+function ExperienceCard({
+  experience,
+  tintIndex,
+}: {
+  experience: Experience;
+  tintIndex: number;
+}) {
   return (
-    <article className="card overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <article
+      className={`card card-interactive ${cardTint(tintIndex)} overflow-hidden rounded-2xl`}
+    >
       <div className="p-6 space-y-4">
         <div className="space-y-2">
           <h2 className="text-xl font-bold text-accent">{experience.name}</h2>
@@ -85,7 +95,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
 
         <p className="text-foreground/90 leading-relaxed">{experience.summary}</p>
 
-        <div className="card p-4 border-l-4 border-l-accent">
+        <div className="card card-tint-blue rounded-xl border-l-4 border-l-accent p-4">
           <h3 className="text-sm font-semibold text-foreground mb-1">Impact</h3>
           <p className="text-sm text-foreground/85 leading-relaxed">
             {experience.impact}
@@ -98,52 +108,43 @@ function ExperienceCard({ experience }: { experience: Experience }) {
 
 export default function ExperiencePage() {
   return (
-    <main className="max-w-4xl mx-auto px-6 pt-16 pb-10 space-y-12">
-      <section aria-labelledby="experience-hero" className="space-y-4">
-        <h1
-          id="experience-hero"
-          className="text-3xl md:text-4xl font-bold text-accent"
-        >
-          Experience
-        </h1>
-        <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
-          Professional roles and engagements across enterprise software, SaaS
-          product design, full-stack consulting, digital media production, and
-          open-source community leadership.
-        </p>
-      </section>
-
-      <section aria-label="Experience list" className="space-y-6">
-        {experiences.map((experience) => (
-          <ExperienceCard key={experience.name} experience={experience} />
-        ))}
-      </section>
+    <main>
+      <PageHero
+        id="experience-hero"
+        eyebrow="Career"
+        title={
+          <>
+            Professional{" "}
+            <span className="text-accent-muted">Experience</span>
+          </>
+        }
+        description="Professional roles and engagements across enterprise software, SaaS product design, full-stack consulting, digital media production, and open-source community leadership."
+      />
 
       <section
-        aria-labelledby="experience-cta"
-        className="bg-accent rounded-xl p-8 text-surface text-center space-y-4"
+        aria-label="Experience list"
+        className="section-band px-6 py-16 md:py-20"
       >
-        <h2 id="experience-cta" className="text-xl font-bold">
-          See the work behind the experience
-        </h2>
-        <p className="opacity-90 max-w-md mx-auto">
-          Explore projects, skills, and more about my background.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/projects"
-            className="bg-accent-pale text-foreground px-5 py-2 rounded-md font-medium hover:bg-accent-pale/90 transition-colors"
-          >
-            View Projects
-          </Link>
-          <Link
-            href="/about"
-            className="border border-surface text-surface px-5 py-2 rounded-md font-medium hover:bg-surface/10 transition-colors"
-          >
-            About Me
-          </Link>
+        <div className="mx-auto max-w-4xl space-y-6">
+          {experiences.map((experience, index) => (
+            <ExperienceCard
+              key={experience.name}
+              experience={experience}
+              tintIndex={index}
+            />
+          ))}
         </div>
       </section>
+
+      <CtaBand
+        id="experience-cta"
+        title="See the work behind the experience"
+        description="Explore projects, skills, and more about my background."
+        links={[
+          { href: "/projects", label: "View Projects" },
+          { href: "/about", label: "About Me", variant: "secondary" },
+        ]}
+      />
     </main>
   );
 }
