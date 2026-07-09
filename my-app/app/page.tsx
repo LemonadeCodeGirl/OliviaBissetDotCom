@@ -594,6 +594,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+        
+        <iframe src="https://bony-brownie-9d2.notion.site/ebd//398a6abb5c768011812adac117b0e1c9" width="100%" height="600" />
 
         <section
           aria-labelledby="about-heading"
@@ -642,6 +644,17 @@ export default function Home() {
             <ContactForm />
           </div>
         </section>
+        <footer className="section-plain px-6 py-20 md:py-28">
+          <div className="mx-auto max-w-3xl">
+            <p>© 2026 Olivia Bisset. All rights reserved.</p>
+            <p>Version 1.0.0</p>
+            {/* <p>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="/terms-of-service">Terms of Service</Link>
+            </p> */}
+          </div>
+        </footer>
     </main>
+
   );
 }
