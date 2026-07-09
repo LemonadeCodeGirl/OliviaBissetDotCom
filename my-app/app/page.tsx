@@ -595,7 +595,7 @@ export default function Home() {
           </div>
         </section>
         
-        <iframe src="https://bony-brownie-9d2.notion.site/ebd//398a6abb5c768011812adac117b0e1c9" width="100%" height="600" />
+        {/* <iframe src="https://bony-brownie-9d2.notion.site/ebd//398a6abb5c768011812adac117b0e1c9" width="100%" height="600" /> */}
 
         <section
           aria-labelledby="about-heading"
