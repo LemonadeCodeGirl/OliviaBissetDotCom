@@ -42,7 +42,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Input is too long" }, { status: 400 });
   }
 
-  const supabase = createSupabaseAdmin();
+  let supabase;
+
+  try {
+    supabase = createSupabaseAdmin();
+  } catch (error) {
+    console.error("Supabase configuration error:", error);
+    return NextResponse.json(
+      { error: "Server configuration error. Please try again later." },
+      { status: 500 },
+    );
+  }
+
   const { error } = await supabase.from("Contact").insert({
     name,
     phone: optionalString(body.phone),

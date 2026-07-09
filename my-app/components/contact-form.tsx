@@ -34,7 +34,19 @@ export default function ContactForm() {
         }),
       });
 
-      const data = (await response.json()) as { error?: string };
+      let data: { error?: string } = {};
+
+      try {
+        data = (await response.json()) as { error?: string };
+      } catch {
+        setStatus("error");
+        setErrorMessage(
+          response.ok
+            ? "Something went wrong. Please try again."
+            : `Request failed (${response.status}). Please try again.`,
+        );
+        return;
+      }
 
       if (!response.ok) {
         setStatus("error");

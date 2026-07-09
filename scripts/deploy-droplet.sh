@@ -49,7 +49,7 @@ pnpm build
 
 echo "==> Starting app with PM2..."
 pm2 delete oliviabisset 2>/dev/null || true
-pm2 start pnpm --name oliviabisset --cwd "$APP_DIR/my-app" -- start
+pm2 start ecosystem.config.cjs --cwd "$APP_DIR/my-app"
 pm2 save
 pm2 startup systemd -u root --hp /root 2>/dev/null | tail -1 | bash || true
 

@@ -59,7 +59,9 @@ cd my-app
 pnpm install --frozen-lockfile
 pnpm build
 
-pm2 restart oliviabisset
+pm2 delete oliviabisset 2>/dev/null || true
+pm2 start ecosystem.config.cjs
+pm2 save
 pm2 status
 ```
 
@@ -104,7 +106,7 @@ cd /var/www/oliviabisset/my-app
 pnpm install --frozen-lockfile
 pnpm build
 
-pm2 start pnpm --name oliviabisset --cwd /var/www/oliviabisset/my-app -- start
+pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup
 ```
@@ -154,7 +156,7 @@ rm -rf .next
 pnpm install --frozen-lockfile
 pnpm build
 
-pm2 start pnpm --name oliviabisset --cwd "$APP_DIR/my-app" -- start
+pm2 start ecosystem.config.cjs
 pm2 save
 
 pm2 status
@@ -225,7 +227,7 @@ pm2 delete myapp || true
 pm2 delete oliviabisset || true
 
 cd /var/www/oliviabisset/my-app
-pm2 start pnpm --name oliviabisset --cwd /var/www/oliviabisset/my-app -- start
+pm2 start ecosystem.config.cjs
 pm2 save
 
 pm2 status
@@ -252,9 +254,37 @@ pm2 start pnpm --name oliviabisset -- start -- -p 3000
 Use this instead:
 
 ```bash
-# GOOD: next start defaults to port 3000
-pm2 start pnpm --name oliviabisset --cwd /var/www/oliviabisset/my-app -- start
+# GOOD: loads .env.local and starts Next.js on port 3000
+cd /var/www/oliviabisset/my-app
+pm2 start ecosystem.config.cjs
 ```
+
+### Contact form fails on the live site
+
+The API route needs Supabase env vars at runtime. PM2 does **not** load `.env.local` automatically unless you use `ecosystem.config.cjs`.
+
+1. Confirm the env file exists in the **app** directory (not the repo root):
+   ```bash
+   ls -la /var/www/oliviabisset/my-app/.env.local
+   cat /var/www/oliviabisset/my-app/.env.local
+   ```
+   It should contain `SUPABASE_URL` and `SUPABASE_SECRET_KEY`.
+
+2. Restart with the ecosystem config (not plain `pm2 restart` after an old setup):
+   ```bash
+   cd /var/www/oliviabisset/my-app
+   pm2 delete oliviabisset || true
+   pm2 start ecosystem.config.cjs
+   pm2 save
+   ```
+
+3. Test the API directly:
+   ```bash
+   curl -s -X POST https://oliviabisset.com/api/contact \
+     -H "Content-Type: application/json" \
+     -d '{"name":"Test","message":"hello"}'
+   ```
+   A successful response looks like: `{"ok":true}`
 
 #### Node version warnings
 
