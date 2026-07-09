@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 type ContactPayload = {
   name?: unknown;
+  service?: unknown;
   phone?: unknown;
   website?: unknown;
   budget?: unknown;
@@ -15,6 +16,10 @@ function optionalString(value: unknown): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
+function formatMessageWithService(service: string, message: string): string {
+  return `Service: ${service}\n\n${message}`;
+}
+
 export async function POST(request: Request) {
   let body: ContactPayload;
 
@@ -25,10 +30,15 @@ export async function POST(request: Request) {
   }
 
   const name = optionalString(body.name);
+  const service = optionalString(body.service);
   const message = optionalString(body.message);
 
   if (!name) {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  }
+
+  if (!service) {
+    return NextResponse.json({ error: "Please select a service" }, { status: 400 });
   }
 
   if (!message) {
@@ -38,7 +48,9 @@ export async function POST(request: Request) {
     );
   }
 
-  if (name.length > 200 || message.length > 5000) {
+  const storedMessage = formatMessageWithService(service, message);
+
+  if (name.length > 200 || storedMessage.length > 5000) {
     return NextResponse.json({ error: "Input is too long" }, { status: 400 });
   }
 
@@ -59,7 +71,7 @@ export async function POST(request: Request) {
     phone: optionalString(body.phone),
     website: optionalString(body.website),
     budget: optionalString(body.budget),
-    message,
+    message: storedMessage,
   });
 
   if (error) {

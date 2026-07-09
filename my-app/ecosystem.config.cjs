@@ -32,6 +32,14 @@ function parseEnvFile(filePath) {
 }
 
 const appDir = __dirname;
+const envLocalPath = path.join(appDir, ".env.local");
+
+if (!fs.existsSync(envLocalPath)) {
+  console.warn(
+    `[ecosystem] Warning: ${envLocalPath} not found. Create it with SUPABASE_URL and SUPABASE_SECRET_KEY.`,
+  );
+}
+
 const envFromFile = {
   ...parseEnvFile(path.join(appDir, ".env")),
   ...parseEnvFile(path.join(appDir, ".env.local")),

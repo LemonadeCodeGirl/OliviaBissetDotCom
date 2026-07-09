@@ -7,6 +7,15 @@ const inputClassName =
 
 const labelClassName = "mb-2 block text-sm font-semibold text-foreground";
 
+const serviceOptions = [
+  { value: "free-consultation", label: "Free Consultation" },
+  { value: "website-redesign", label: "Website Redesign" },
+  { value: "new-website", label: "New Website" },
+  { value: "custom-software", label: "Custom Software or Web Application" },
+  { value: "technical-consulting", label: "Technical Consulting" },
+  { value: "other", label: "Other / Not Sure" },
+] as const;
+
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
@@ -27,6 +36,7 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.get("name"),
+          service: formData.get("service"),
           phone: formData.get("phone"),
           website: formData.get("website"),
           budget: formData.get("budget"),
@@ -72,7 +82,8 @@ export default function ContactForm() {
           role="status"
           className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-800"
         >
-          Thanks for reaching out! I&apos;ll get back to you soon.
+          Thanks for reaching out! Please look out for an email from me in the
+          next 24–48 hours.
         </p>
       )}
 
@@ -99,6 +110,29 @@ export default function ContactForm() {
           className={inputClassName}
           placeholder="Your name"
         />
+      </div>
+
+      <div>
+        <label htmlFor="service" className={labelClassName}>
+          Service Interested In
+        </label>
+        <select
+          id="service"
+          name="service"
+          required
+          disabled={status === "submitting"}
+          className={inputClassName}
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select a service
+          </option>
+          {serviceOptions.map((option) => (
+            <option key={option.value} value={option.label}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">

@@ -261,24 +261,40 @@ pm2 start ecosystem.config.cjs
 
 ### Contact form fails on the live site
 
-The API route needs Supabase env vars at runtime. PM2 does **not** load `.env.local` automatically unless you use `ecosystem.config.cjs`.
+The API route needs Supabase env vars at runtime. **`.env.local` is not in git** — you must create it manually on the server.
 
-1. Confirm the env file exists in the **app** directory (not the repo root):
+1. Confirm the env file exists in the **app** directory:
    ```bash
    ls -la /var/www/oliviabisset/my-app/.env.local
-   cat /var/www/oliviabisset/my-app/.env.local
    ```
-   It should contain `SUPABASE_URL` and `SUPABASE_SECRET_KEY`.
 
-2. Restart with the ecosystem config (not plain `pm2 restart` after an old setup):
+   If it is missing, create it:
    ```bash
-   cd /var/www/oliviabisset/my-app
+   nano /var/www/oliviabisset/my-app/.env.local
+   ```
+   ```env
+   SUPABASE_URL=https://your-project.supabase.co
+   SUPABASE_SECRET_KEY=your_secret_key_here
+   ```
+
+2. Pull latest code, rebuild, and restart PM2 with the ecosystem config:
+   ```bash
+   cd /var/www/oliviabisset
+   git pull origin main
+   cd my-app
+   pnpm install --frozen-lockfile
+   pnpm build
    pm2 delete oliviabisset || true
    pm2 start ecosystem.config.cjs
    pm2 save
    ```
 
-3. Test the API directly:
+3. If it still fails, check logs for which env files were found:
+   ```bash
+   pm2 logs oliviabisset --lines 30 --nostream
+   ```
+
+4. Test the API directly:
    ```bash
    curl -s -X POST https://oliviabisset.com/api/contact \
      -H "Content-Type: application/json" \
