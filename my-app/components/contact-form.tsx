@@ -1,13 +1,53 @@
 "use client";
 
+import { useState } from "react";
+
 const inputClassName =
   "w-full rounded-xl border border-accent-muted/40 bg-surface/50 px-4 py-3 text-foreground placeholder:text-foreground/40 transition-colors focus:border-accent focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/15";
 
 const labelClassName = "mb-2 block text-sm font-semibold text-foreground";
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export default function ContactForm() {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          website: formData.get("website"),
+          budget: formData.get("budget"),
+          message: formData.get("message"),
+        }),
+      });
+
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setStatus("error");
+        setErrorMessage(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMessage("Something went wrong. Please try again.");
+    }
   }
 
   return (
@@ -15,6 +55,24 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       className="card card-tint-cream space-y-6 rounded-2xl p-6 md:p-8"
     >
+      {status === "success" && (
+        <p
+          role="status"
+          className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-800"
+        >
+          Thanks for reaching out! I&apos;ll get back to you soon.
+        </p>
+      )}
+
+      {status === "error" && (
+        <p
+          role="alert"
+          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-800"
+        >
+          {errorMessage}
+        </p>
+      )}
+
       <div>
         <label htmlFor="name" className={labelClassName}>
           Name
@@ -25,6 +83,7 @@ export default function ContactForm() {
           type="text"
           autoComplete="name"
           required
+          disabled={status === "submitting"}
           className={inputClassName}
           placeholder="Your name"
         />
@@ -40,6 +99,7 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            disabled={status === "submitting"}
             className={inputClassName}
             placeholder="(555) 555-5555"
           />
@@ -54,6 +114,7 @@ export default function ContactForm() {
             name="website"
             type="url"
             autoComplete="url"
+            disabled={status === "submitting"}
             className={inputClassName}
             placeholder="https://yourwebsite.com"
           />
@@ -67,6 +128,7 @@ export default function ContactForm() {
         <select
           id="budget"
           name="budget"
+          disabled={status === "submitting"}
           className={inputClassName}
           defaultValue=""
         >
@@ -91,6 +153,7 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
+          disabled={status === "submitting"}
           className={`${inputClassName} resize-y`}
           placeholder="Tell me about your project, goals, and what you need help with."
         />
@@ -98,9 +161,10 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full rounded-full bg-accent px-6 py-3 font-medium text-surface shadow-sm transition-colors hover:bg-accent-light md:w-auto"
+        disabled={status === "submitting"}
+        className="w-full rounded-full bg-accent px-6 py-3 font-medium text-surface shadow-sm transition-colors hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
       >
-        Send Message
+        {status === "submitting" ? "Sending..." : "Send Message"}
       </button>
     </form>
   );
