@@ -340,7 +340,7 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto max-w-4xl space-y-6 px-6 py-16 text-center md:py-24">
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent-muted">
-              Software Engineer · Digital Systems Builder
+              Software Engineer · Digital Systems Builder · Digital Creator
             </p>
             <h1
               id="hero-heading"
