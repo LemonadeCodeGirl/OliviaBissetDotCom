@@ -414,7 +414,7 @@ export default function About() {
         description="Interested in working together or just want to say hello? I'd love to hear from you."
         links={[
           { href: "/projects", label: "View Projects" },
-          { href: "/contact", label: "Contact Me" },
+          { href: "/connect", label: "Contact Me" },
           {
             href: "https://linkedin.com",
             label: "LinkedIn",

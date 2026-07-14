@@ -364,7 +364,7 @@ export default function Projects() {
         description="Explore my background or get in touch to discuss a project."
         links={[
           { href: "/about", label: "About Me" },
-          { href: "/contact", label: "Contact Me", variant: "secondary" },
+          { href: "/connect", label: "Contact Me", variant: "secondary" },
         ]}
       />
     </main>

@@ -356,7 +356,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <PrimaryButton href="/projects">View Projects</PrimaryButton>
-              <SecondaryButton href="/contact">Contact Me</SecondaryButton>
+              <SecondaryButton href="/connect">Contact Me</SecondaryButton>
             </div>
           </div>
         </section>
@@ -595,8 +595,6 @@ export default function Home() {
           </div>
         </section>
         
-        {/* <iframe src="https://bony-brownie-9d2.notion.site/ebd//398a6abb5c768011812adac117b0e1c9" width="100%" height="600" /> */}
-
         <section
           aria-labelledby="about-heading"
           className="section-band px-6 py-20 md:py-28"

@@ -68,7 +68,7 @@ export default function Nav() {
           Experience
         </Link>
         <Link
-          href="/contact"
+          href="/connect"
           className={
             blendWithHero
               ? "hover:text-white transition-colors"
