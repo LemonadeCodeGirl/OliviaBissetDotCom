@@ -623,8 +623,9 @@ export default function Home() {
         </section>
 
         <section
+          id="connect"
           aria-labelledby="contact-heading"
-          className="section-plain px-6 py-20 md:py-28"
+          className="section-plain scroll-mt-24 px-6 py-20 md:py-28"
         >
           <div className="mx-auto max-w-3xl">
             <SectionHeader
@@ -636,6 +637,7 @@ export default function Home() {
                   <span className="text-accent">great</span>
                 </>
               }
+              // id="connect"
               description="Have a project in mind? Fill out the form below and I'll get back to you."
               centered
             />
